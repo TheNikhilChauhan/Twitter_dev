@@ -31,6 +31,13 @@ class UserService {
           message: "No user found",
         };
       }
+      if (!user.comparePassword(data.password)) {
+        throw {
+          message: "incorrect password",
+        };
+      }
+      const token = user.genJWT();
+      return token;
     } catch (error) {
       throw error;
     }
